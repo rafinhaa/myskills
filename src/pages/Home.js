@@ -1,4 +1,4 @@
-import React from "react"; // Sempre usar o React para usar a sintaxe do JSX
+import React, {useState} from "react"; // Sempre usar o React para usar a sintaxe do JSX
 import {View, 
   Text, 
   StyleSheet, 
@@ -8,19 +8,45 @@ import {View,
   } from "react-native";
 
 export function Home() {
+  const [newSkill, setNewSkill] = useState('');
+  const [mySkills, setMySkills] = useState([]);
+
+  function handleAddNewSkill() {
+    setMySkills(oldState => [...oldState, newSkill]); // ...oldState = é o array que tem em setMySkills
+    setNewSkill('');
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bem-vindo, Rafael!</Text>
-      <TextInput style={styles.input} placeholder="Digite seu nome" placeholderTextColor="#555" />
+      <TextInput 
+        style={styles.input} 
+        placeholder="Digite seu nome" 
+        placeholderTextColor="#555" 
+        onChangeText={text => setNewSkill(text)}
+      />
       <TouchableOpacity 
         style={styles.button}
         activeOpacity={0.6}
+        onPress={handleAddNewSkill}
       >
-        <Text style={styles.buttonText}>Entrar</Text>
+        <Text style={styles.buttonText}>Adicionar</Text>
       </TouchableOpacity>
-      <Text style={[styles.title, {marginTop:50}]}>
+      <Text style={[styles.title, {marginVertical:50}]}>
         My Skills
       </Text>
+      {
+        mySkills.map((skill, index) => (
+          <TouchableOpacity
+            style={styles.buttonSkill} 
+            key={index}  
+          >
+            <Text  style={styles.skill}>
+              {skill}
+            </Text>
+          </TouchableOpacity>
+        ))
+      }
     </View>
   );
 }
@@ -56,5 +82,17 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  buttonSkill: {
+    backgroundColor: "#1f1e25",
+    padding: 15,
+    borderRadius: 50,
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  skill: {
+    color: "#fff",
+    fontSize: 22,
+    fontWeight: "bold",
   },
 });
