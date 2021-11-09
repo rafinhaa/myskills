@@ -24,7 +24,7 @@ export function Home() {
       <Text style={styles.title}>Bem-vindo, Rafael!</Text>
       <TextInput 
         style={styles.input} 
-        placeholder="Digite seu nome" 
+        placeholder="Digite sua skill" 
         placeholderTextColor="#555" 
         onChangeText={text => setNewSkill(text)}
       />
