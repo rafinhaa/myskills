@@ -1,4 +1,4 @@
-import React, {useState} from "react"; // Sempre usar o React para usar a sintaxe do JSX
+import React, {useEffect, useState} from "react"; // Sempre usar o React para usar a sintaxe do JSX
 import {
   View, 
   Text, 
@@ -13,15 +13,34 @@ import { SkillCard } from "../components/SkillCard";
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
   const [mySkills, setMySkills] = useState([]);
+  const [gretting, setGretting] = useState('');
 
   function handleAddNewSkill() {
     setMySkills(oldState => [...oldState, newSkill]); // ...oldState = é o array que tem em setMySkills
     setNewSkill('');
   }
 
+  useEffect(() => {
+    const currentHours = new Date().getHours();
+    switch (true) {
+      case currentHours >= 0 && currentHours < 12:
+        setGretting('Bom dia!');
+        break;
+      case currentHours >= 12 && currentHours < 18:
+        setGretting('Boa tarde!');
+        break;
+      default:
+        setGretting('Boa noite!');
+        break;
+    }
+  },[])
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bem-vindo, Rafael!</Text>
+      <Text style={styles.greetings}>
+        {gretting}
+      </Text>
       <TextInput 
         style={styles.input} 
         placeholder="Digite sua skill" 
@@ -64,5 +83,10 @@ const styles = StyleSheet.create({
     padding: Platform.OS === "ios" ? 20 : 10,
     marginTop: 30,
     borderRadius: 7,
+  },
+  greetings: {
+    color: "#fff",
+    fontSize: 18,
+    marginTop: 30,
   },
 });
