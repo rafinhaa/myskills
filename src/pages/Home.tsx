@@ -10,13 +10,22 @@ import {
 import { Button } from "../components/Button";
 import { SkillCard } from "../components/SkillCard";
 
+interface SkillData {
+  id: number;
+  name: string;
+}
+
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
   const [gretting, setGretting] = useState('');
 
   function handleAddNewSkill() {
-    setMySkills(oldState => [...oldState, newSkill]); // ...oldState = é o array que tem em setMySkills
+    const data = {
+      id: Math.round(Math.random() * Number.MAX_SAFE_INTEGER),
+      name: newSkill,
+    }
+    setMySkills(oldState => [...oldState, data]); // ...oldState = é o array que tem em setMySkills
     setNewSkill('');
   }
 
@@ -57,8 +66,8 @@ export function Home() {
       </Text>
       <FlatList 
         data={mySkills}
-        keyExtractor={(item, index) => index}
-        renderItem={({item}) => <SkillCard skill={item} />}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <SkillCard skill={item.name} />}
       />
     </View>
   );
