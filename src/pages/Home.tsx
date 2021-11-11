@@ -37,13 +37,13 @@ export function Home() {
     const currentHours = new Date().getHours();
     switch (true) {
       case currentHours >= 0 && currentHours < 12:
-        setGretting('Bom dia!');
+        setGretting('Bom dia...');
         break;
       case currentHours >= 12 && currentHours < 18:
-        setGretting('Boa tarde!');
+        setGretting('Boa tarde...');
         break;
       default:
-        setGretting('Boa noite!');
+        setGretting('Boa noite...');
         break;
     }
   },[])
@@ -67,7 +67,7 @@ export function Home() {
       />
 
       <Text style={[styles.title, {marginVertical:50}]}>
-        My Skills
+        Minhas habilidades
       </Text>
       <FlatList 
         data={mySkills}
