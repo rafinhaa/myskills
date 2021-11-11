@@ -29,6 +29,10 @@ export function Home() {
     setNewSkill('');
   }
 
+  function handleRemoveSkill(id: string) {
+    setMySkills(skills => skills.filter(skill => skill.id !== id)); // Percorre o array e retorna todos os objetos que não é o igual ao id passado
+  }
+
   useEffect(() => {
     const currentHours = new Date().getHours();
     switch (true) {
@@ -68,7 +72,11 @@ export function Home() {
       <FlatList 
         data={mySkills}
         keyExtractor={item => item.id}
-        renderItem={({item}) => <SkillCard skill={item.name} />}
+        renderItem={({item}) => 
+          <SkillCard 
+            skill={item.name}
+            onPress={() => handleRemoveSkill(item.id)}
+         /> }
       />
     </View>
   );
