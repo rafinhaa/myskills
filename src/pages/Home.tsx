@@ -73,8 +73,7 @@ export function Home() {
         renderItem={({item}) => 
           <SkillCard 
             skill={item.name}
-            onPress={() => handleRemoveSkill(item.id)}
-          /> }
+            onPress={() => handleRemoveSkill(item.id)}/> }
       />
     </View>
   );
