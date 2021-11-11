@@ -11,7 +11,7 @@ import { Button } from "../components/Button";
 import { SkillCard } from "../components/SkillCard";
 
 interface SkillData {
-  id: number;
+  id: string;
   name: string;
 }
 
@@ -22,7 +22,7 @@ export function Home() {
 
   function handleAddNewSkill() {
     const data = {
-      id: Math.round(Math.random() * Number.MAX_SAFE_INTEGER),
+      id: Math.round(Math.random() * Number.MAX_SAFE_INTEGER).toString(),
       name: newSkill,
     }
     setMySkills(oldState => [...oldState, data]); // ...oldState = é o array que tem em setMySkills
@@ -59,6 +59,7 @@ export function Home() {
 
       <Button 
         onPress={handleAddNewSkill}
+        title="Adicionar"
       />
 
       <Text style={[styles.title, {marginVertical:50}]}>
