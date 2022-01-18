@@ -51,8 +51,7 @@ yarn run ios
 #### Build in Android
 
 ```bash
-cd ios && pod install && cd..
-yarn run ios
+yarn run android
 ```
 
 ## ℹ️ Info
